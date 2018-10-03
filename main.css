@@ -10,20 +10,59 @@ html{
     font-family: 'Raleway', sans-serif;
 }
 
+.header{
+    text-align: center;
+}
+
+.logo {
+    padding-top:2em;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
 .catTable{
     display:flex;
     flex-direction:row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top:2em;
+    margin-left:auto;
+    margin-right:auto;
+    width:90%;
 }
 .category{
-    margin:1em;
+    /*margin:1em;*/
+    padding:2em;
+    background-color:grey;
+    border-radius:2px;
+}
+
+.category:hover{
+    background-color:lightblue;
+}
+
+
+/*Toggle switch*/
+.toggleContainer{
+    margin-top:3em;
+}
+.toggle{
+    margin-right:-6px;
     padding:1em;
     background-color:grey;
     border-radius:2px;
-    opacity:.6;
 }
-.catText{
-    opacity:1 !important;
+.toggle:hover{
+   background-color:lightblue;
 }
-.category:hover{
-    opacity:1;
+.selected{
+    background-color: lightblue;
+}
+
+
+
+#output{
+    margin:2em;
 }
