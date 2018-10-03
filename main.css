@@ -22,6 +22,9 @@ html{
     width: 70%;
 }
 
+
+
+/*Category options*/
 .catTable{
     display:flex;
     flex-direction:row;
@@ -38,10 +41,10 @@ html{
     background-color:grey;
     border-radius:2px;
 }
-
 .category:hover{
     background-color:lightblue;
 }
+
 
 
 /*Toggle switch*/
