@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <title>REST Practice</title>
+     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <head>
+        <link rel="stylesheet" type="text/css" href="main.css">
+         <script>
+            /* global $ */
+            $(document).ready(function() {
+                $('.category').click(function(e){
+                    console.log($(e.currentTarget)[0].id);
+                    var category = $(e.currentTarget)[0].id;
+                    var response = getRandomFact(category);
+                      
+                });
+                
+            });
+            
+            function getRandomFact(category){
+                var myText = $('textInput').val();
+                var maxInt = (category == "films") ? 7 : 36;
+                var randInt = Math.floor(Math.random() * Math.floor(maxInt));
+                console.log(randInt);
+                var myurl= "https://swapi.co/api/" + category + "/" + randInt + "/"; //planets/2/?format=wookiee";
+                console.log(myurl);
+                  $.ajax({
+                    url : myurl,
+                    crossDomain: true,
+                    dataType: 'json',
+                    //contentType: 'application/json',
+                    success : function(parsed_json) {
+                      console.log(parsed_json);
+                      $("#output").html(JSON.stringify(parsed_json["name"]));
+                    },
+                    error: function(e){
+                        console.log("ERROR");
+                        console.log(e.responseText);
+                        //if error, run again with a new randomInt (bc some don't exist -_o_-)
+                        if(e.responseText == '{"detail":"Not found"}'){
+                            getRandomFact(category);
+                        }
+                        
+                    }
+                  });
+                }
+            
+        </script>
+    </head>
+    <body>
+        <div>
+            <h2>Random Star Wars Facts</h2>
+            <div class="catTable">
+               <div class="category" id="people"><span class="catText">People</span></div>
+               <div class="category" id="planets"><span class="catText">Planets</span></div>
+               <div class="category" id="starships"><span class="catText">Starships</span></div>
+               <div class="category" id="species"><span class="catText">Species</span></div>
+               <div class="category" id="films"><span class="catText">Films</span></div>
+            </div>
+        </div>
+        <div id="output"></div>
+    </body>
+
+</html>

@@ -1,0 +1,29 @@
+html{
+    background-image:url("stars.jpg");
+    background-color: black;
+    background-size:cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    background-position: center center;
+    
+    color: white;
+    font-family: 'Raleway', sans-serif;
+}
+
+.catTable{
+    display:flex;
+    flex-direction:row;
+}
+.category{
+    margin:1em;
+    padding:1em;
+    background-color:grey;
+    border-radius:2px;
+    opacity:.6;
+}
+.catText{
+    opacity:1 !important;
+}
+.category:hover{
+    opacity:1;
+}
