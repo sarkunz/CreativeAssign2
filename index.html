@@ -30,12 +30,13 @@
                     //contentType: 'application/json',
                     success : function(parsed_json) {
                       console.log(parsed_json);
-                      $("#output").html(JSON.stringify(parsed_json["name"]));
+                      $("#output").html(parsed_json["name"]);
+                      //get & display the rest of the info
                     },
                     error: function(e){
                         console.log("ERROR");
                         console.log(e.responseText);
-                        //if error, run again with a new randomInt (bc some don't exist -_o_-)
+                        //if error, run again with a new randomInt (bc some indexes randomly dont exist in the api)
                         if(e.responseText == '{"detail":"Not found"}'){
                             getRandomFact(category);
                         }
