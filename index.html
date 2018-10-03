@@ -7,10 +7,10 @@
     <link rel="stylesheet" type="text/css" href="main.css">
     <script>
         /* global $ */
-        //category click function
+        
         $(document).ready(function() {
+            //category click function
             $('.category').click(function(e) {
-                console.log($(e.currentTarget)[0].id);
                 var category = $(e.currentTarget)[0].id;
                 var response = getRandomFact(category);
             });
@@ -27,6 +27,7 @@
                     $('#wookie').removeClass('selected')
                 }
             })
+            
         });
 
         function getRandomFact(category) {
@@ -47,12 +48,10 @@
                 },
                 error: function(e) {
                     console.log("ERROR");
-                    console.log(e.responseText);
                     //if error, run again with a new randomInt (bc some indexes randomly dont exist in the api)
                     if (e.responseText == '{"detail":"Not found"}') {
                         getRandomFact(category);
                     }
-
                 }
             });
         }
