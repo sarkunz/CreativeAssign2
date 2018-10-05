@@ -8,7 +8,7 @@
     <script>
         /* global $ */
         var movieArray = ["","A New Hope","The Empire Strikes Back","Return of the Jedi","The Phantom Menace","Attack of the Clones","Revenge of the Sith","The Force Awakens"];
-        
+        var language = 'english';
         $(document).ready(function() {
             //category click function
             $('.category').click(function(e) {
@@ -18,7 +18,7 @@
 
             //language toggle function
             $('.toggle').click(function(e) {
-                var language = $(e.currentTarget)[0].id;
+                language = $(e.currentTarget)[0].id;
                 if (language == 'wookie') {
                     $("#wookie").addClass('selected');
                     $('#english').removeClass('selected')
@@ -46,50 +46,49 @@
                     console.log(parsed_json);
                     
                     var information = "";
-                    
-                    switch(category)//not sure what all information we would want to include. A lot of the types of data would require additional ajax calls, and I'm not sure if we want to do that or not.
+                    if(language == 'english')
                     {
-                        case "people":
-                            information += "<h3>Character</h3>";
-                            information += "<p>" + parsed_json["name"] + "</p>";
-                            information += "<p>Height: " + centimetersToFeet(parsed_json["height"] + "</p>");
-                            information += "<p>Weight: " + kgToPounds(parsed_json["mass"]) + "</p>";
-                            break;
-                            
-                        case "planets":
-                            information += "<h3>Planet</h3>";
-                            information += "<p>" + parsed_json["name"] + "</p>";
-                            information += "<p>Diameter: " + kmToMiles(parsed_json["diameter"]) + "</p>";
-                            information += "<p>Climate: " + parsed_json["climate"] + "</p>";
-                            
-                            break;
-                            
-                        case "starships":
-                            information += "<h3>Starship</h3>";
-                            information += "<p>" + parsed_json["name"] + "</p>";
-                            information += "<p>Length: " + metersToFeet(parsed_json["length"]) + "</p>";
-                            information += "<p>Crew Size: " + parsed_json["crew"] + "</p>";
-                            
-                            break;
-                            
-                        case "species":
-                            information += "<h3>Species</h3>";
-                            information += "<p>" + parsed_json["name"] + "</p>";
-                            information += "<p>Language: " + parsed_json["language"] + "</p>";
-                            information += "<p>Average Height: " + centimetersToFeet(parsed_json["average_height"]) + "</p>";
-                            information += "<p>Skin Color(s): " + parsed_json["skin_colors"] + "</p>";
-                            information += "<p>Average Lifespan: " + parsed_json["average_lifespan"] + "</p>";
-                            
-                        case "films":
-                            console.log("got here");
-                            information += "<h3>Film</h3>"
-                            information += "<p>Star Wars Episode " + romanNumeralify(parsed_json["episode_id"]) + ": " + parsed_json["title"] + "</p>";
-                            information += "<p>Director: " + parsed_json["director"] + "</p>";
-                            information += "<p>Producer: " + parsed_json["producer"] + "</p>";
-                            information += "<p>Release Date: " + dateReadable(parsed_json["release_date"]) + "</p>";
-                            break;
-                    }
-                    
+                        switch(category)//not sure what all information we would want to include. A lot of the types of data would require additional ajax calls, and I'm not sure if we want to do that or not.
+                        {
+                            case "people":
+                                information += "<h3>Character</h3>";
+                                information += "<p>" + parsed_json["name"] + "</p>";
+                                information += "<p>Height: " + centimetersToFeet(parsed_json["height"] + "</p>");
+                                information += "<p>Weight: " + kgToPounds(parsed_json["mass"]) + "</p>";
+                                break;
+                                
+                            case "planets":
+                                information += "<h3>Planet</h3>";
+                                information += "<p>" + parsed_json["name"] + "</p>";
+                                information += "<p>Diameter: " + kmToMiles(parsed_json["diameter"]) + "</p>";
+                                information += "<p>Climate: " + parsed_json["climate"] + "</p>";
+                                
+                                break;
+                                
+                            case "starships":
+                                information += "<h3>Starship</h3>";
+                                information += "<p>" + parsed_json["name"] + "</p>";
+                                information += "<p>Length: " + metersToFeet(parsed_json["length"]) + "</p>";
+                                information += "<p>Crew Size: " + parsed_json["crew"] + "</p>";
+                                
+                                break;
+                                
+                            case "species":
+                                information += "<h3>Species</h3>";
+                                information += "<p>" + parsed_json["name"] + "</p>";
+                                information += "<p>Language: " + parsed_json["language"] + "</p>";
+                                information += "<p>Average Height: " + centimetersToFeet(parsed_json["average_height"]) + "</p>";
+                                information += "<p>Skin Color(s): " + parsed_json["skin_colors"] + "</p>";
+                                information += "<p>Average Lifespan: " + parsed_json["average_lifespan"] + "</p>";
+                                
+                            case "films":
+                                information += "<h3>Film</h3>";
+                                information += "<p>Star Wars Episode " + romanNumeralify(parsed_json["episode_id"]) + ": " + parsed_json["title"] + "</p>";
+                                information += "<p>Director: " + parsed_json["director"] + "</p>";
+                                information += "<p>Producer: " + parsed_json["producer"] + "</p>";
+                                information += "<p>Release Date: " + dateReadable(parsed_json["release_date"]) + "</p>";
+                                break;
+                        }
                     if(category != "films")
                     {
                         if(parsed_json["films"].length > 0)
@@ -97,11 +96,46 @@
                             information += "<p>Films:</p><ul>";
                             
                             $.each(parsed_json["films"], function(index, value){
-                                information += "<li>" + getMovieName(value) + "</li>"
+                                information += "<li>" + getMovieName(value) + "</li>";
                             });
                             information += "</ul>";
                         }
                     }
+                    }
+                    if(language == 'wookie')
+                    {
+                        switch(category)
+                        {
+                            case "people":
+                                information += "<h3>" + parsed_json["whrascwo"] + "</h3>";
+                                information += "<p>Acwoahrracao: " + centimetersToFeet(parsed_json["acwoahrracao"]) + "</p>";
+                                information += "<p>Scracc: " + kgToPounds(parsed_json["scracc"]) + "</p>";
+                                break;
+                                
+                            case "planets":
+                                information += "<h3>" + parsed_json["whrascwo"] + "</h3>";
+                                information += "<p>Waahrascwoaoworc: " + kmToMiles(parsed_json["waahrascwoaoworc"]) + "</p>";
+                                information += "<p>Oaanahscraaowo: " + parsed_json["oaanahscraaowo"] + "</p>";
+                                
+                                break;
+                                
+                            case "starships":
+                                information += "<h3>" + parsed_json["whrascwo"] + "</h3>";
+                                information += "<p>Anwowhrraoac: " + metersToFeet(parsed_json["anwowhrraoac"]) + "</p>";
+                                information += "<p>Oarcwooh: " + parsed_json["oarcwooh"] + "</p>";
+                                
+                                break;
+                                
+                            case "species":
+                                information += "<h3>" + parsed_json["whrascwo"] + "</h3>";
+                                information += "<p>Wawocahrrwhraaoahoowh: " + parsed_json["wawocahrrwhraaoahoowh"] + "</p>";
+                                information += "<p>Corahwh Oaooanoorcc: " + parsed_json["corahwh_oaooanoorcc"] + "</p>";
+                                
+
+                                
+                        }
+                    }
+
                     
                     $("#output").html(information);
                     //TODO: get & display the rest of the info
@@ -152,7 +186,6 @@
             if(height == "unknown")
                 return height;
             var centimeters = parseInt(height, 10);
-            console.log("centimeters: " + centimeters);
             var inches = Math.round(centimeters * .393701);
             var feet = Math.floor(inches/12);
             inches = inches % 12;
