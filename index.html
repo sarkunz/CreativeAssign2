@@ -43,14 +43,11 @@
                 $("#output").html(message);
                 return;
             }
-            console.log(myurl);
             $.ajax({
                 url: myurl,
                 crossDomain: true,
                 dataType: 'json',
                 success: function(parsed_json) {
-                    console.log(parsed_json);
-                    
                     var information = "";
                     if(language == 'english')
                     {
