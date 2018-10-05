@@ -37,6 +37,12 @@
             var randInt = Math.floor(Math.random() * Math.floor(maxInt));
             var wookie = ($('#wookie').hasClass('selected')) ? "?format=wookiee" : "";
             var myurl = "https://swapi.co/api/" + category + "/" + randInt + "/" + wookie;
+            if(wookie && category == "films"){
+                var message = "<h3>Aarrragghuuhw Huurh</h3>"
+                message += "<p>...Sorry, film info doesn't translate well. Try this request again in english</p>"
+                $("#output").html(message);
+                return;
+            }
             console.log(myurl);
             $.ajax({
                 url: myurl,
@@ -51,39 +57,39 @@
                         switch(category)//not sure what all information we would want to include. A lot of the types of data would require additional ajax calls, and I'm not sure if we want to do that or not.
                         {
                             case "people":
-                                information += "<h3>Character</h3>";
-                                information += "<p>" + parsed_json["name"] + "</p>";
+                                //information += "<h3>Character</h3>";
+                                information += "<h3>" + parsed_json["name"] + "</h3>";
                                 information += "<p>Height: " + centimetersToFeet(parsed_json["height"] + "</p>");
                                 information += "<p>Weight: " + kgToPounds(parsed_json["mass"]) + "</p>";
                                 break;
                                 
                             case "planets":
-                                information += "<h3>Planet</h3>";
-                                information += "<p>" + parsed_json["name"] + "</p>";
+                                //information += "<h3>Planet</h3>";
+                                information += "<h2>" + parsed_json["name"] + "</h2>";
                                 information += "<p>Diameter: " + kmToMiles(parsed_json["diameter"]) + "</p>";
                                 information += "<p>Climate: " + parsed_json["climate"] + "</p>";
                                 
                                 break;
                                 
                             case "starships":
-                                information += "<h3>Starship</h3>";
-                                information += "<p>" + parsed_json["name"] + "</p>";
+                                //information += "<h3>Starship</h3>";
+                                information += "<h3>" + parsed_json["name"] + "</h3>";
                                 information += "<p>Length: " + metersToFeet(parsed_json["length"]) + "</p>";
                                 information += "<p>Crew Size: " + parsed_json["crew"] + "</p>";
                                 
                                 break;
                                 
                             case "species":
-                                information += "<h3>Species</h3>";
-                                information += "<p>" + parsed_json["name"] + "</p>";
+                                //information += "<h3>Species</h3>";
+                                information += "<h3>" + parsed_json["name"] + "</h3>";
                                 information += "<p>Language: " + parsed_json["language"] + "</p>";
                                 information += "<p>Average Height: " + centimetersToFeet(parsed_json["average_height"]) + "</p>";
                                 information += "<p>Skin Color(s): " + parsed_json["skin_colors"] + "</p>";
                                 information += "<p>Average Lifespan: " + parsed_json["average_lifespan"] + "</p>";
-                                
+                                break;
                             case "films":
-                                information += "<h3>Film</h3>";
-                                information += "<p>Star Wars Episode " + romanNumeralify(parsed_json["episode_id"]) + ": " + parsed_json["title"] + "</p>";
+                                //information += "<h3>Film</h3>";
+                                information += "<h3>Star Wars Episode " + romanNumeralify(parsed_json["episode_id"]) + ": " + parsed_json["title"] + "</h3>";
                                 information += "<p>Director: " + parsed_json["director"] + "</p>";
                                 information += "<p>Producer: " + parsed_json["producer"] + "</p>";
                                 information += "<p>Release Date: " + dateReadable(parsed_json["release_date"]) + "</p>";
@@ -130,21 +136,19 @@
                                 information += "<h3>" + parsed_json["whrascwo"] + "</h3>";
                                 information += "<p>Wawocahrrwhraaoahoowh: " + parsed_json["wawocahrrwhraaoahoowh"] + "</p>";
                                 information += "<p>Corahwh Oaooanoorcc: " + parsed_json["corahwh_oaooanoorcc"] + "</p>";
+                                break;
                                 
-
                                 
                         }
                     }
-
-                    
                     $("#output").html(information);
-                    //TODO: get & display the rest of the info
-                    //We may not want to include films because they look like a pain. IDK though
+                    
                 },
                 error: function(e) {
                     console.log("ERROR");
                     //if error, run again with a new randomInt (bc some indexes randomly dont exist in the api)
-                    if (e.responseText == '{"detail":"Not found"}') {
+                    if (e.responseText == '{"detail":"Not found"}'
+                        || e.responseText == '{"wawoaoraahan":"Nooao wwoohuwhwa"}') {
                         getRandomFact(category);
                     }
                 }
@@ -229,7 +233,7 @@
         <span class="toggle selected" id="english">English</span>
         <span class="toggle" id="wookie">Wookie</span>
     </div>
-    <div id="output"></div>
+    <div id="outputContainer"><div id="output"></div></div>
 </body>
 
 </html>
